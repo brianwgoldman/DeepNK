@@ -40,6 +40,7 @@ class Matrix {
   const size_t cols() const {
     return ncols;
   }
+  void resize(const size_t rows, const size_t columns);
   // Selects columns and does a weighted sum of their values using weights
   vector<value_type> build_column(const vector<size_t>& column_indexes, const vector<value_type>& weights) const;
 

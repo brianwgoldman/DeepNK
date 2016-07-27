@@ -2,13 +2,18 @@
 #include "Matrix.h"
 #include <cassert>
 
-Matrix::Matrix(const size_t rows, const size_t columns) : data(columns, vector<float>(rows)), nrows(rows), ncols(columns) {
+Matrix::Matrix(const size_t rows, const size_t columns) : data(columns, vector<value_type>(rows)), nrows(rows), ncols(columns) {
 
 }
 
 void load_csv(string filename, Matrix& data, vector<label_type>& labels) {
   // TODO Implement this code
   assert(false);
+}
+
+void Matrix::resize(const size_t rows, const size_t columns) {
+  data.clear();
+  data.resize(columns, vector<value_type>(rows));
 }
 
 vector<value_type> Matrix::build_column(const vector<size_t>& column_indexes, const vector<value_type>& weights) const {

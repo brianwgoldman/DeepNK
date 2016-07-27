@@ -5,17 +5,23 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/Configuration.cpp \
+../src/DeepNK.cpp \
 ../src/Matrix.cpp \
+../src/OutputNode.cpp \
 ../src/main.cpp 
 
 OBJS += \
 ./src/Configuration.o \
+./src/DeepNK.o \
 ./src/Matrix.o \
+./src/OutputNode.o \
 ./src/main.o 
 
 CPP_DEPS += \
 ./src/Configuration.d \
+./src/DeepNK.d \
 ./src/Matrix.d \
+./src/OutputNode.d \
 ./src/main.d 
 
 
