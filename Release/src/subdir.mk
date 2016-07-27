@@ -6,19 +6,16 @@
 CPP_SRCS += \
 ../src/Configuration.cpp \
 ../src/Matrix.cpp \
-../src/Node.cpp \
 ../src/main.cpp 
 
 OBJS += \
 ./src/Configuration.o \
 ./src/Matrix.o \
-./src/Node.o \
 ./src/main.o 
 
 CPP_DEPS += \
 ./src/Configuration.d \
 ./src/Matrix.d \
-./src/Node.d \
 ./src/main.d 
 
 

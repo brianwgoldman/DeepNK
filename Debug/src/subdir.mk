@@ -4,12 +4,18 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../src/Configuration.cpp \
+../src/Matrix.cpp \
 ../src/main.cpp 
 
 OBJS += \
+./src/Configuration.o \
+./src/Matrix.o \
 ./src/main.o 
 
 CPP_DEPS += \
+./src/Configuration.d \
+./src/Matrix.d \
 ./src/main.d 
 
 
