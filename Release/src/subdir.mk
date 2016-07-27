@@ -8,6 +8,7 @@ CPP_SRCS += \
 ../src/DeepNK.cpp \
 ../src/Matrix.cpp \
 ../src/OutputNode.cpp \
+../src/QualityMeasures.cpp \
 ../src/main.cpp 
 
 OBJS += \
@@ -15,6 +16,7 @@ OBJS += \
 ./src/DeepNK.o \
 ./src/Matrix.o \
 ./src/OutputNode.o \
+./src/QualityMeasures.o \
 ./src/main.o 
 
 CPP_DEPS += \
@@ -22,6 +24,7 @@ CPP_DEPS += \
 ./src/DeepNK.d \
 ./src/Matrix.d \
 ./src/OutputNode.d \
+./src/QualityMeasures.d \
 ./src/main.d 
 
 
