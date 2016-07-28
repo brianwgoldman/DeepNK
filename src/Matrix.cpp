@@ -6,9 +6,11 @@ Matrix::Matrix(const size_t rows, const size_t columns) : data(columns, vector<v
 
 }
 
-void load_csv(string filename, Matrix& data, vector<label_type>& labels) {
+void load_csv(string filename, Matrix& inputs, vector<label_type>& labels) {
   // TODO Implement this code
   assert(false);
+  inputs.clear();
+  labels.clear();
 }
 
 void Matrix::resize(const size_t rows, const size_t columns) {

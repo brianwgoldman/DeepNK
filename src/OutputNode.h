@@ -16,7 +16,7 @@ class OutputNode {
  public:
   OutputNode(const Configuration& config, const size_t position=-1, const size_t n=-1, const size_t k=-1) {
     setup(position, n, k);
-    target = config.get<label_type>("target");
+    target = config.get<label_type>("target_label");
     threshold = config.get<value_type>("fire_threshold");
   }
   void setup(const size_t position, const size_t n, const size_t k);

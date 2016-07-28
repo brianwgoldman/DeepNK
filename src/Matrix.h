@@ -32,6 +32,9 @@ class Matrix {
     return ncols;
   }
   void resize(const size_t rows, const size_t columns);
+  void clear() {
+    data.clear();
+  }
   // Selects columns and does a weighted sum of their values using weights
   vector<value_type> build_column(const vector<size_t>& column_indexes, const vector<value_type>& weights) const;
 
@@ -39,6 +42,6 @@ class Matrix {
 };
 
 Matrix multiply(const Matrix& lhs, const Matrix& rhs);
-void load_csv(string filename, Matrix& data, vector<label_type>& labels);
+void load_csv(const string filename, Matrix& inputs, vector<label_type>& labels);
 
 #endif /* MATRIX_H_ */

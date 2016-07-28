@@ -11,3 +11,14 @@ value_type threshold_to_label_accuracy(const vector<value_type>& output_column, 
   }
   return static_cast<value_type>(correct) / labels.size();
 }
+
+vector<vector<size_t>> single_target_confusion_matrix(const vector<label_type>& estimated, const vector<label_type>& actual, const label_type target) {
+  assert(estimated.size() == actual.size());
+  // create a 2x2 table
+  vector<vector<size_t>> result(2, vector<size_t>(2, 0));
+  for (size_t r=0; r < estimated.size(); r++) {
+    result[actual[r] == target][estimated[r] == target]++;
+  }
+
+  return result;
+}

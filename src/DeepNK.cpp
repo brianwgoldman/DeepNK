@@ -19,3 +19,30 @@ void DeepNK::build_nk_table(Configuration& config, const Matrix& inputs,
     }
   }
 }
+
+void DeepNK::find_optimum_nk() {
+  // TODO Copy over existing C++ code and augment it using Francisco's code
+  assert(false);
+}
+
+void DeepNK::configure_outputs() {
+  // TODO Finish implementing this
+  assert(false);
+}
+
+void DeepNK::write_as_NN(Configuration& config) {
+  if (not config.has(nn_output_key)) {
+    return;
+  }
+  string filename = config.get<string>(nn_output_key);
+  if (filename == "none") {
+    return;
+  }
+  // TODO Finish implementing this
+  assert(false);
+}
+
+vector<label_type> DeepNK::classify(const Matrix& inputs) {
+  // TODO Finish implementing this
+  assert(false);
+}
