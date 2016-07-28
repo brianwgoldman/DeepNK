@@ -18,7 +18,7 @@
 using std::unordered_map;
 using std::string;
 
-const string config_file_key = "cfg_file";
+const string config_output_key = "cfg_out";
 
 class Configuration {
  public:
@@ -47,6 +47,10 @@ class Configuration {
   template<class T>
   void set(const string key, const T value) {
     data[key] = std::to_string(value);
+  }
+
+  bool has(const string key) const {
+    return data.find(key) != data.end();
   }
 
  private:

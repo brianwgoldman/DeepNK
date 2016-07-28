@@ -74,10 +74,10 @@ float Configuration::get(const string key) const {
 }
 
 void Configuration::dump() {
-  if (data.count(config_file_key) == 0) {
+  if (not has(config_output_key)) {
     return;
   }
-  string out_filename = get<string>(config_file_key);
+  string out_filename = get<string>(config_output_key);
   if (out_filename != "none") {
     std::ofstream out(out_filename);
     dump(out);
