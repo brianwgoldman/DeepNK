@@ -13,8 +13,7 @@ class DeepNK {
   DeepNK() = default;
   virtual ~DeepNK() = default;
   void build_nk_table(Configuration& config, const Matrix& inputs,
-                      const vector<value_type>& labels, Matrix& weights);
+                      const vector<label_type>& labels);
 };
-
 
 #endif /* DEEPNK_H_ */

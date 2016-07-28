@@ -2,16 +2,7 @@
 #ifndef MATRIX_H_
 #define MATRIX_H_
 
-#include <string>
-using std::string;
-#include <vector>
-using std::vector;
-using std::size_t;
-#include <cassert>
-
-using value_type=float;
-// TODO This is basically a stub until I know what the labels look like
-using label_type=string;
+#include "Utilities.h"
 
 class Matrix {
   // Stored as data[column][row] since most of the time you want

@@ -9,6 +9,7 @@ CPP_SRCS += \
 ../src/Matrix.cpp \
 ../src/OutputNode.cpp \
 ../src/QualityMeasures.cpp \
+../src/Utilities.cpp \
 ../src/main.cpp 
 
 OBJS += \
@@ -17,6 +18,7 @@ OBJS += \
 ./src/Matrix.o \
 ./src/OutputNode.o \
 ./src/QualityMeasures.o \
+./src/Utilities.o \
 ./src/main.o 
 
 CPP_DEPS += \
@@ -25,6 +27,7 @@ CPP_DEPS += \
 ./src/Matrix.d \
 ./src/OutputNode.d \
 ./src/QualityMeasures.d \
+./src/Utilities.d \
 ./src/main.d 
 
 
