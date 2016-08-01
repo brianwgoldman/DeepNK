@@ -91,7 +91,6 @@ void DeepNK::find_optimum_nk() {
 
   for (size_t f = 0; f < K; f++) {
     // Used to strip off bits not used by this function
-    //size_t shift_size = K - f - 1;
     for (size_t before_wrap = 0; before_wrap < powk; before_wrap++) {
       for (size_t after_wrap = 0; after_wrap < powk; after_wrap++) {
         const size_t previous_function_pattern = before_wrap | (after_wrap << K);

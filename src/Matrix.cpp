@@ -16,6 +16,8 @@ void load_csv(string filename, Matrix& inputs, vector<label_type>& labels) {
 void Matrix::resize(const size_t rows, const size_t columns) {
   data.clear();
   data.resize(columns, vector<value_type>(rows));
+  nrows = rows;
+  ncols = columns;
 }
 
 vector<value_type> Matrix::build_column(const vector<size_t>& column_indexes, const vector<value_type>& weights) const {
