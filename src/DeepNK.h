@@ -17,11 +17,11 @@ class DeepNK {
   size_t N=0;
   vector<bool> selected_inputs;
   value_type estimated_quality=0;
+  vector<value_type> output_scores;
  public:
-  DeepNK() = default;
+  DeepNK(const Configuration& config, Random& random);
   virtual ~DeepNK() = default;
-  void build_nk_table(Configuration& config, const Matrix& inputs,
-                      const vector<label_type>& labels);
+  void build_nk_table(const Matrix& inputs, const vector<label_type>& labels);
   // Find the best bitstring and record which entries in the table
   // were chosen, and how good they were
   void find_optimum_nk();

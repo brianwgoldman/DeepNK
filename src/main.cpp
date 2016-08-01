@@ -16,6 +16,15 @@ int main(int argc, char * argv[]) {
   config.parse(argc, argv);
   string training_file = config.get<string>("training_input");
   string testing_file = config.get<string>("testing_input");
+  Random random;
+  int seed = config.get<int>("seed");
+  if (seed == -1) {
+    std::random_device rd;
+    seed = rd();
+    config.set("seed", seed);
+  }
+  random.seed(seed);
+
   config.dump();
 
   // Read in CSV file encoding the training data
@@ -28,8 +37,8 @@ int main(int argc, char * argv[]) {
   // Note if you do add a layer, you'll need to write it to a file.
 
   // Construct a DeepNK classifier
-  DeepNK nk_classifier;
-  nk_classifier.build_nk_table(config, inputs, labels);
+  DeepNK nk_classifier(config, random);
+  nk_classifier.build_nk_table(inputs, labels);
 
   // Use the training data to configure the classifier
   nk_classifier.find_optimum_nk();

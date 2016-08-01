@@ -14,14 +14,12 @@ class OutputNode {
   label_type target;
   value_type threshold;
  public:
-  OutputNode(const Configuration& config, const size_t position=-1, const size_t n=-1, const size_t k=-1) {
-    setup(position, n, k);
-    target = config.get<label_type>("target_label");
-    threshold = config.get<value_type>("fire_threshold");
-  }
-  void setup(const size_t position, const size_t n, const size_t k);
+  OutputNode() = default;
+  void setup(const Configuration& config, const size_t position, const size_t n, const size_t k, Random& random);
   virtual ~OutputNode() = default;
   value_type score(const Matrix& inputs, const vector<size_t>& active, const vector<label_type>& labels);
+  void configure(const vector<size_t>& active);
+  vector<label_type> test(const Matrix& inputs) const;
 
 };
 

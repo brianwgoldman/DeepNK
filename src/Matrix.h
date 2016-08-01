@@ -37,7 +37,7 @@ class Matrix {
   }
   // Selects columns and does a weighted sum of their values using weights
   vector<value_type> build_column(const vector<size_t>& column_indexes, const vector<value_type>& weights) const;
-
+  void fill_with_random_weights(Random& random);
   friend Matrix multiply(const Matrix& lhs, const Matrix& rhs);
 };
 

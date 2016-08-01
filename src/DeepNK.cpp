@@ -1,12 +1,21 @@
 // Brian Goldman
 #include "DeepNK.h"
 
-void DeepNK::build_nk_table(Configuration& config, const Matrix& inputs,
-                            const vector<label_type>& labels) {
-  // Each output node depends on exactly "K+1" columns from "inputs".
-  N = inputs.cols();
+#include <unordered_map>
+using std::unordered_map;
+
+DeepNK::DeepNK(const Configuration& config, Random& random) {
+  N = config.get<size_t>("N");
   K = config.get<size_t>("K");
-  assert(N == outputs.size());
+  outputs.resize(N);
+  for (size_t o=0; o < N; o++) {
+    outputs[o].setup(config, o, N, K, random);
+  }
+}
+
+void DeepNK::build_nk_table(const Matrix& inputs, const vector<label_type>& labels) {
+  // Each output node depends on exactly "K+1" columns from "inputs".
+  assert(N == inputs.cols());
   const size_t patterns = 2 << K;
   nk_table.resize(N, patterns);
 
@@ -123,7 +132,7 @@ void DeepNK::find_optimum_nk() {
   for (size_t i = dependencies; i < N; i++) {
     auto best_bit = best_bit_choice[i][before_wrap | (after_wrap << K)];
     if (best_bit == TIE) {
-      // TODO Handle this better
+      // TODO Handle ties better
       best_bit = 0;
     }
     selected_inputs[i] = best_bit;
@@ -134,8 +143,24 @@ void DeepNK::find_optimum_nk() {
 }
 
 void DeepNK::configure_outputs() {
-  // TODO Finish implementing this
-  assert(false);
+  output_scores.resize(N);
+  value_type total_score = 0;
+  for (size_t o=0; o < N; o++) {
+    vector<size_t> relative_indexes;
+    size_t score_index = 0;
+    for (size_t i=0; i <= K; i++) {
+      auto value = selected_inputs[(o + i) % N];
+      if (value) {
+        relative_indexes.push_back(i);
+        score_index |= (1 << i);
+      }
+    }
+    outputs[o].configure(relative_indexes);
+    output_scores[o] = nk_table.value(o, score_index);
+    total_score += nk_table.value(o, score_index);
+  }
+  std::cout << "Configured Score: " << total_score
+            << " Estimated: " << estimated_quality << std::endl;
 }
 
 void DeepNK::write_as_NN(Configuration& config) {
@@ -151,6 +176,26 @@ void DeepNK::write_as_NN(Configuration& config) {
 }
 
 vector<label_type> DeepNK::classify(const Matrix& inputs) {
-  // TODO Finish implementing this
-  assert(false);
+  // TODO consider replacing map if you get integer labels
+  vector<unordered_map<label_type, value_type>> weighted_output(inputs.rows());
+  for (size_t o=0; o < N; o++) {
+    auto labels = outputs[o].test(inputs);
+    const value_type weight = output_scores[o];
+    for (size_t row=0; row < labels.size(); row++) {
+      weighted_output[row][labels[row]] += weight;
+    }
+  }
+  vector<label_type> ensemble_labels(inputs.rows());
+  for (size_t row = 0; row < ensemble_labels.size(); row++) {
+    value_type best_weight = 0;
+    label_type best_class = NO_CLASS;
+    for (const auto pair : weighted_output[row]) {
+      if (pair.second > best_weight) {
+        best_weight = pair.second;
+        best_class = pair.first;
+      }
+    }
+    ensemble_labels[row] = best_class;
+  }
+  return ensemble_labels;
 }

@@ -48,3 +48,13 @@ Matrix multiply(const Matrix& lhs, const Matrix& rhs) {
   }
   return result;
 }
+
+void Matrix::fill_with_random_weights(Random& random) {
+  for (size_t row = 0; row < nrows; row++) {
+    auto weights = random_log_weights(ncols, random);
+    for (size_t col = 0; col < ncols; col++) {
+      // TODO Consider direct access
+      value(row, col) = weights[col];
+    }
+  }
+}
