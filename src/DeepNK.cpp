@@ -29,6 +29,7 @@ void DeepNK::find_optimum_nk() {
   assert(N >= dependencies);
   const size_t patterns = 1 << dependencies;
   const size_t K_plus_1_bits = (1 << (K + 1)) - 1;
+  const size_t powk = 1 << K;
   // These are used to build and store the functions created
   // by removing a bit.
   vector<float> previous_function(patterns, 0);
@@ -46,8 +47,7 @@ void DeepNK::find_optimum_nk() {
       previous_function[pattern] += nk_table.value(f, relevant_bits);
     }
   }
-  const size_t powk = 1 << K;
-  const size_t two_K_bits = (1 << dependencies) - 1;
+
   // "n" is the bit position we are currently trying to remove.
   // You could also say at the end of this loop the problem size will be n.
   for (size_t n = N - 1; n >= dependencies; n--) {
@@ -88,7 +88,6 @@ void DeepNK::find_optimum_nk() {
 
   // previous_function is now wide enough to score all remaining patterns
   // so we can just copy in the remaining NK functions
-
   for (size_t f = 0; f < K; f++) {
     // Used to strip off bits not used by this function
     for (size_t before_wrap = 0; before_wrap < powk; before_wrap++) {
