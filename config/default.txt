@@ -1,0 +1,4 @@
+seed -1
+training_input training.csv
+testing_input testing.csv
+K 5
