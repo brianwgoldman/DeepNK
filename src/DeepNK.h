@@ -13,6 +13,10 @@ class DeepNK {
   // just something that gets handed around.
   Matrix nk_table;
   vector<OutputNode> outputs;
+  size_t K=0;
+  size_t N=0;
+  vector<bool> selected_inputs;
+  value_type estimated_quality=0;
  public:
   DeepNK() = default;
   virtual ~DeepNK() = default;
